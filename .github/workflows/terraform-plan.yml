@@ -20,5 +20,16 @@ jobs:
           aws-secret-access-key: ${{secrets.AWS_SECRET_KEY}}
           aws-region: 'eu-west-2'
 
-      - name: Init terraform
-        run: terraform
+      
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v4
+
+      - name: init Terraform
+        run: terraform init
+
+      - id: plan
+        run: terraform plan -no-color
+
+      - run: echo ${{ steps.plan.outputs.stdout }}
+      - run: echo ${{ steps.plan.outputs.stderr }}
+      - run: echo ${{ steps.plan.outputs.exitcode }}
