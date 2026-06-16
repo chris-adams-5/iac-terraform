@@ -3,6 +3,8 @@ name: Deploy terrafrom
 on:
   pull_request:
       branches: [ "main" ]
+      types:
+        - closed
     
 jobs:
   deploy-terraform:
@@ -25,12 +27,8 @@ jobs:
         uses: hashicorp/setup-terraform@v4
 
       - name: init Terraform
-        run: terraform init
+        run: terraform init -backend-config="./state.config"  
+
 
       - id: apply
         run: terraform apply -auto-approve
-
-      - run: echo ${{ steps.apply.outputs.stdout }}
-      - run: echo ${{ steps.apply.outputs.stderr }}
-      - run: echo ${{ steps.apply.outputs.exitcode }}
-        
