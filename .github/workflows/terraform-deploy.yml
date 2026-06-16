@@ -1,0 +1,6 @@
+name: Deploy terrafrom
+
+on:
+  push:
+  
+jobs:
