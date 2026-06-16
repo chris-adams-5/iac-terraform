@@ -27,5 +27,6 @@ jobs:
       - name: init Terraform
         run: terraform init -backend-config="./state.config"  
 
+        
       - id: plan
         run: terraform plan -no-color
