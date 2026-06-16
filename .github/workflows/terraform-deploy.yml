@@ -1,6 +1,15 @@
 name: Deploy terrafrom
 
 on:
-  push:
-  
+  pull_request:
+      branches: [ "main" ]
+    
 jobs:
+  deploy-terraform:
+    runs-on: ubuntu-latest
+    environment: prod
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6
+        
