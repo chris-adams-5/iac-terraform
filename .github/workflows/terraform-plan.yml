@@ -30,6 +30,11 @@ jobs:
       - id: plan
         run: terraform plan -no-color
 
-      - run: echo ${{ steps.plan.outputs.stdout }}
-      - run: echo ${{ steps.plan.outputs.stderr }}
-      - run: echo ${{ steps.plan.outputs.exitcode }}
+      - name: stdout
+        run: echo ${{ steps.plan.outputs.stdout }}
+      
+      - name: stderror
+        run: echo ${{ steps.plan.outputs.stderr }}
+
+      - name: exitcode
+        run: echo ${{ steps.plan.outputs.exitcode }}
