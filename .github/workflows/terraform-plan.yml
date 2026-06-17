@@ -1,7 +1,10 @@
 name: Plan terraform
 
 on:
-  push:
+  pull_request:
+      branches: [ "main" ]
+      types:
+        - closed
 
 jobs:
   terraform-plan:
@@ -30,3 +33,9 @@ jobs:
 
       - id: plan
         run: terraform plan -no-color
+
+      - name: Post PR comment
+        uses: borchero/terraform-plan-comment@v2
+        with:
+          token: ${{ github.token }}
+          planfile: .planfile
