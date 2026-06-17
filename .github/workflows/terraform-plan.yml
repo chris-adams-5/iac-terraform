@@ -35,6 +35,9 @@ jobs:
         run: terraform plan -out .planfile
 
       - name: Post PR comment
-        run: gh pr comment 13 --body "Hi from GitHub CLI
+        run: gh issue comment $ISSUE --body "Thank you for opening this issue!"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE: ${{ github.event.issue.html_url }}
 
         
