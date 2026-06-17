@@ -35,7 +35,6 @@ jobs:
         run: terraform plan -out .planfile
 
       - name: Post PR comment
-        uses: borchero/terraform-plan-comment@v2
-        with:
-          token: ${{ github.token }}
-          planfile: .planfile
+        run: gh pr comment 13 --body "Hi from GitHub CLI
+
+        
