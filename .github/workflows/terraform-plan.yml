@@ -32,7 +32,7 @@ jobs:
 
 
       - id: plan
-        run: terraform plan -no-color
+        run: terraform plan -out .planfile
 
       - name: Post PR comment
         uses: borchero/terraform-plan-comment@v2
