@@ -47,6 +47,29 @@ resource "aws_elastic_beanstalk_environment" "task_listing_app_environment" {
     name      = "EC2KeyName"
     value     = "chris-cloud-containers"
   }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "DB_HOST"
+    value     = aws_db_instance.rds_app.address
+  }
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "DB_USER"
+    value     = aws_db_instance.rds_app.username
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "DB_PASSWORD"
+    value     = aws_db_instance.rds_app.password
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "DB_DATABASE"
+    value     = "postgres"
+  }
 }
 
 resource "aws_db_instance" "rds_app" {
