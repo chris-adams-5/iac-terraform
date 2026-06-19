@@ -11,6 +11,13 @@ resource "aws_ecr_repository" "ecr_repo" {
   }
 }
 
+resource "aws_s3_bucket" "docker_config" {
+  bucket = "chris-tf-docker-config"
+  tags = {
+    owner = "chris-ce"
+  }
+}
+
 
 resource "aws_elastic_beanstalk_application" "task_listing_app" {
   name        = "chris-task-listing-app"
@@ -40,4 +47,16 @@ resource "aws_elastic_beanstalk_environment" "task_listing_app_environment" {
     name      = "EC2KeyName"
     value     = "chris-cloud-containers"
   }
+}
+
+resource "aws_db_instance" "rds_app" {
+  allocated_storage   = 10
+  engine              = "postgres"
+  engine_version      = "18"
+  instance_class      = "db.t3.micro"
+  identifier          = "chris-tasklist-app-prod"
+  username            = "root"
+  password            = "password"
+  skip_final_snapshot = true
+  publicly_accessible = true
 }
